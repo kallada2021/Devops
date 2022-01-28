@@ -1,3 +1,4 @@
+/* try */
 pipeline {
     agent any
     tools {
