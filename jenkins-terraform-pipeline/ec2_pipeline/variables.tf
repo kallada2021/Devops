@@ -1,8 +1,6 @@
-provider "aws" {
-  region = "us-west-2"
+variable "access_key" {
+  type = string
 }
-
-resource "aws_instance" "example" {
-  ami           = "ami-0721c9af7b9b75114"
-  instance_type = "t2.nano"
+variable "secret_key" {
+  type = string
 }
