@@ -3,5 +3,6 @@ terraform {
     bucket = "week-24-project-01282022"
     key    = "remote.tfstate"
     region = "us-east-1"
+    # s3 bucket
   }
 }
