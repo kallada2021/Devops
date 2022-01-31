@@ -13,17 +13,14 @@ pipeline {
     }
 
    agent  any
-        options {
-                timestamps ()
-                ansiColor('xterm')
-            }
+      
     stages {
         stage('checkout') {
             steps {
                  script{
                         dir("terraform")
                         {
-                            git "https://github.com/easyawslearn/Terraform-Tutorial.git"
+                            git "https://github.com/kallada2021/Devops.git"
                         }
                     }
                 }
