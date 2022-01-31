@@ -28,18 +28,13 @@ pipeline {
             }
 
         stage('Plan') {
-            when {
-                not {
-                    equals expected: true, actual: params.destroy
-                }
-            }
-            
+                       
             steps {
-                sh 'terraform init -input=false'
-                sh 'terraform workspace select ${environment} || terraform workspace new ${environment}'
-
-                sh "terraform plan -input=false -out tfplan "
-                sh 'terraform show -no-color tfplan > tfplan.txt'
+                sh 'pwd;cd kallada2021/Devops ; terraform init -input=false'
+                sh 'pwd;cd kallada2021/Devops ; terraform workspace new ${environment}'     
+                sh 'pwd;cd kallada2021/Devops ; terraform workspace select ${environment}'
+                sh "pwd;cd kallada2021/Devops ;terraform plan -input=false -out tfplan "
+                sh 'pwd;cd kallada2021/Devops ;terraform show -no-color tfplan > tfplan.txt'
             }
         }
         stage('Approval') {
@@ -52,12 +47,10 @@ pipeline {
                 }
            }
            
-                
-            
-
+           
            steps {
                script {
-                    def plan = readFile 'tfplan.txt'
+                    def plan = readFile 'kallada2021/Devops/tfplan.txt'
                     input message: "Do you want to apply the plan?",
                     parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
                }
@@ -72,7 +65,7 @@ pipeline {
             }
             
             steps {
-                sh "terraform apply -input=false tfplan"
+                sh "pwd;cd kallada2021/Devops ; terraform apply -input=false tfplan"
             }
         }
         

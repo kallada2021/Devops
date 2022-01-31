@@ -1,8 +1,4 @@
-provider "aws" {
-  region = "us-west-2"
-}
-
-resource "aws_instance" "example" {
-  ami           = "ami-01893222c83843146"
-  instance_type = "t2.micro"
-}
+resource "aws_instance" "web1" {
+   ami           = "${lookup(var.ami_id, var.region)}"
+   instance_type = "t2.micro"
+ }
